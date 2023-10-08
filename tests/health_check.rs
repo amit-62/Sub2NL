@@ -5,7 +5,7 @@ use std::net::TcpListener;
 fn spawn_app() -> String {
     let listener = TcpListener::bind("127.0.0.1:0").expect("failed to bind address");
     let port = listener.local_addr().unwrap().port();
-    let server = z2p::run(listener).expect("Failed to bind address");
+    let server = z2p::startup::run(listener).expect("Failed to bind address");
     let _ = tokio::spawn(server);
     format!("http://127.0.0.1:{}", port)
 }
